@@ -6,7 +6,7 @@ namespace DataDiscovery.Core
 {
     public class CSVFile: FileBase
     {
-        #region Constructer
+        #region Constructor
 
         public CSVFile(string name, bool header = true): base(name,header)
         {

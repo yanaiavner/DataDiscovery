@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Threading;
 
 namespace DataDiscovery.Core
 {
@@ -17,7 +16,7 @@ namespace DataDiscovery.Core
         private List<string> _elmentColumnsNames;
         private string _lastError;
 
-        #region Constructer
+        #region Constructor
 
         protected FileBase(string name, bool header)
         {
@@ -34,15 +33,9 @@ namespace DataDiscovery.Core
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        #region Propertys
+        #region Property
 
-        public string FileName
-        {
-            get
-            {
-                return _fileName;
-            }
-        }
+        public string FileName => _fileName;
 
         public string LastError
         {
@@ -133,13 +126,7 @@ namespace DataDiscovery.Core
             }
         }
 
-        public string[] Header
-        {
-            get
-            {
-                return _elmentColumnsNames.ToArray();
-            }
-        }
+        public string[] Header => _elmentColumnsNames.ToArray();
 
         public string ElemntNames
         {

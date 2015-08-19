@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Xml;
 using System.Xml.Linq;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DataDiscovery.Core
 {
-    
+
     public class XMLFile: FileBase
     {
-        #region Constructer
+        #region Constructor
 
         public XMLFile(string name, bool header = false): base (name, header)
         {

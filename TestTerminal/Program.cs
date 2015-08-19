@@ -39,7 +39,7 @@ namespace TestTerminal
                 LoadOptions.SetBaseUri | LoadOptions.SetLineInfo);
 
 
-            var newXMLFile = new XMLFile("test", true);
+            var newXMLFile = new XMLFile("test");
             newXMLFile.PropertyChanged += (object sender, System.ComponentModel.PropertyChangedEventArgs e) => 
                 {
                     if (e.PropertyName != "AnalyzedElmentsCounter")
@@ -50,7 +50,7 @@ namespace TestTerminal
                 };
 
 
-            Console.WriteLine("{0}{1} lins in file{0}", Environment.NewLine, newXMLFile.GetNodeCount(xmlFile));
+            Console.WriteLine("{0}{1} lines in file{0}", Environment.NewLine, newXMLFile.GetNodeCount(xmlFile));
             Console.WriteLine("{0}{1}{0}", Environment.NewLine, newXMLFile.GetElementColumns(xmlFile));
 
             Console.CursorVisible = false;
@@ -59,42 +59,42 @@ namespace TestTerminal
             Console.CursorVisible = true;
 
             Console.WriteLine("{0}{0}File {1}", Environment.NewLine, analyzeXMLResult.Result ? "analyzed" : "not analyzed");
-
+            Console.ReadKey();
             //newXMLFile.AnalyzeFileAsync(xmlFile);
             //Console.WriteLine("{0}{0}{1}", Environment.NewLine, newXMLFile.ColumnsNames);
 
-            return;
+            //return;
 
-            var newCSVFile = new CSVFile("test_file");
-            newCSVFile.PropertyChanged += (object sender, System.ComponentModel.PropertyChangedEventArgs e) =>
-                {
-                    if (e.PropertyName != "AnalyzedElmentsCounter")
-                        return;
+            //var newCSVFile = new CSVFile("test_file");
+            //newCSVFile.PropertyChanged += (object sender, System.ComponentModel.PropertyChangedEventArgs e) =>
+            //    {
+            //        if (e.PropertyName != "AnalyzedElmentsCounter")
+            //            return;
 
-                    Console.Write("{0} of {1} lines", newCSVFile.AnalyzedElmentsCounter, newCSVFile.ElmentCounter);
-                    Console.CursorLeft = 0;
-                };
+            //        Console.Write("{0} of {1} lines", newCSVFile.AnalyzedElmentsCounter, newCSVFile.ElmentCounter);
+            //        Console.CursorLeft = 0;
+            //    };
             
-            using (var reader = new StreamReader(fileName))
-            { 
-                Console.WriteLine("{0}{1} lins in file{0}", Environment.NewLine, newCSVFile.GetLineCount(reader));
-            }
+            //using (var reader = new StreamReader(fileName))
+            //{ 
+            //    Console.WriteLine("{0}{1} lines in file{0}", Environment.NewLine, newCSVFile.GetLineCount(reader));
+            //}
              
-            using (var reader = new StreamReader(fileName))
-            {
-                Console.WriteLine("{0}{1}{0}", Environment.NewLine, newCSVFile.GetElementColumns(reader));
-            }
+            //using (var reader = new StreamReader(fileName))
+            //{
+            //    Console.WriteLine("{0}{1}{0}", Environment.NewLine, newCSVFile.GetElementColumns(reader));
+            //}
 
-            using (var reader = new StreamReader(fileName))
-            {
-                Console.CursorVisible = false;
-                var analyzeResult = newCSVFile.AnalyzeFileAsync(reader);
-                analyzeResult.Wait();
-                Console.CursorVisible = true;
+            //using (var reader = new StreamReader(fileName))
+            //{
+            //    Console.CursorVisible = false;
+            //    var analyzeResult = newCSVFile.AnalyzeFileAsync(reader);
+            //    analyzeResult.Wait();
+            //    Console.CursorVisible = true;
 
-                Console.WriteLine("{0}{0}File {1}", Environment.NewLine, analyzeResult.Result ? "analyzed" : "not analyzed");
+            //    Console.WriteLine("{0}{0}File {1}", Environment.NewLine, analyzeResult.Result ? "analyzed" : "not analyzed");
         
-            }
+            //}
         }
     }
 }

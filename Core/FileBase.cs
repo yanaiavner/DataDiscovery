@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+<<<<<<< HEAD
+=======
+using System.Threading;
+using System.Linq;
+>>>>>>> Stash
 
 namespace DataDiscovery.Core
 {
@@ -13,7 +18,7 @@ namespace DataDiscovery.Core
         private int _elmentCounter;
         private int _analyzedElmentCounter;
         private int _elmentColumnsCounter;
-        private List<string> _elmentColumnsNames;
+        private List<Tuple<string,int>> _elmentColumnsNames;
         private string _lastError;
 
         #region Constructor
@@ -25,7 +30,7 @@ namespace DataDiscovery.Core
             _elmentCounter = 0;
             _analyzedElmentCounter = 0;
             _elmentColumnsCounter = 0;
-            _elmentColumnsNames = new List<string>();
+            _elmentColumnsNames = new List<Tuple<string,int>>();
             _lastError = string.Empty;
         }
 
@@ -126,7 +131,21 @@ namespace DataDiscovery.Core
             }
         }
 
+<<<<<<< HEAD
         public string[] Header => _elmentColumnsNames.ToArray();
+=======
+        public string[] Header
+        {
+            get
+            {
+                var headers = (from h  in  _elmentColumnsNames
+                    select h.Item1);
+
+               
+                return headers.ToArray();
+            }
+        }
+>>>>>>> Stash
 
         public string ElemntNames
         {
@@ -135,7 +154,7 @@ namespace DataDiscovery.Core
                 string columnsNames = string.Empty;
                 for (int i = 0; i < _elmentColumnsCounter; i++)
                 {
-                    columnsNames = columnsNames + string.Format("Column {0}: {1}{2}", i + 1, _elmentColumnsNames[i], Environment.NewLine);  
+                    columnsNames = columnsNames + $"Column {i + 1}:\t{new String(' ', _elmentColumnsNames[i].Item2)}{_elmentColumnsNames[i].Item1}{Environment.NewLine}"; 
                 }
                 return columnsNames;
             }
@@ -153,12 +172,17 @@ namespace DataDiscovery.Core
             NotifyPropertyChanged("ElemntNames");
         }
 
-        protected void AddElemntColumnsName(string name)
+        protected void AddElemntColumnsName(string name, int level = 1)
         {
-            if (_elmentColumnsNames.Contains(name))
+            AddColumnsName(new Tuple<string,int>(name, level));
+        }
+
+        private void AddColumnsName(Tuple<string, int> column)
+        {
+            if (_elmentColumnsNames.Contains(column))
                 return;
 
-            _elmentColumnsNames.Add(name);
+            _elmentColumnsNames.Add(column);
             NotifyPropertyChanged("Header");
             NotifyPropertyChanged("ElemntNames");
             ElmentColumnsCounter++;

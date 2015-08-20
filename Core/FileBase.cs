@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-<<<<<<< HEAD
-=======
 using System.Threading;
 using System.Linq;
->>>>>>> Stash
 
 namespace DataDiscovery.Core
 {
@@ -131,21 +128,9 @@ namespace DataDiscovery.Core
             }
         }
 
-<<<<<<< HEAD
-        public string[] Header => _elmentColumnsNames.ToArray();
-=======
-        public string[] Header
-        {
-            get
-            {
-                var headers = (from h  in  _elmentColumnsNames
-                    select h.Item1);
 
-               
-                return headers.ToArray();
-            }
-        }
->>>>>>> Stash
+        public string[] Header =>(from h  in  _elmentColumnsNames
+            select h.Item1).ToArray();
 
         public string ElemntNames
         {

@@ -26,6 +26,7 @@ namespace TestTerminal
 //            fileName = @"/Users/ayanai/Documents/Test_Data.csv";
 //            fileName = @"/Users/ayanai/Documents/Test_Data.xml";
 //            fileName = @"/Users/ayanai/Documents/Test_List.xml";
+//            fileName = @"/Users/ayanai/Documents/Test_Data_H.xml";
 
             var fileExists = File.Exists(fileName);
 
@@ -60,6 +61,7 @@ namespace TestTerminal
 
             Console.WriteLine("{0}{0}File {1}", Environment.NewLine, analyzeXMLResult.Result ? "analyzed" : "not analyzed");
             Console.ReadKey();
+
             //newXMLFile.AnalyzeFileAsync(xmlFile);
             //Console.WriteLine("{0}{0}{1}", Environment.NewLine, newXMLFile.ColumnsNames);
 

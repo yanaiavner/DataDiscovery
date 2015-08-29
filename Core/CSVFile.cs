@@ -14,7 +14,7 @@ namespace DataDiscovery.Core
 
         #endregion
 
-        public int AnalyzeLine(string line)
+        private int AnalyzeLine(string line)
         {
             if (string.IsNullOrWhiteSpace(line))
                 return ElmentCounter;
@@ -63,21 +63,7 @@ namespace DataDiscovery.Core
                         break;
                 }
 
-                var lineElemnets = line.Split(',');
-
-                if(IsFirstElemntHeader)
-                {
-                    foreach (var name in lineElemnets) 
-                    {
-                        AddElemntColumnsName(name);
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < lineElemnets.Length; i++) {
-                        AddElemntColumnsName(string.Format("Column{0}", i+1));
-                    }
-                }
+                SetColumnsNamesFromLine(line);
             }
             catch (Exception ex)
             {
@@ -90,10 +76,40 @@ namespace DataDiscovery.Core
             return ElemntNames;
         }
 
+        public void SetColumnsNamesFromLine(string line)
+        {
+
+            try
+            {
+                var lineElemnets = line.Split(',');
+
+                ClearElemntColumnsNames();
+
+                if (IsFirstElemntHeader)
+                {
+                    foreach (var name in lineElemnets)
+                    {
+                        AddElemntColumnsName(name);
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < lineElemnets.Length; i++)
+                    {
+                        AddElemntColumnsName($"Column{i + 1}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LastError = ex.Message;
+            }
+        }
+
         public async Task<bool> AnalyzeFileAsync(TextReader reader)
         {
             var line = string.Empty;
-           AnalyzedElmentsCounter = 0;
+            AnalyzedElmentsCounter = 0;
 
             try
             {

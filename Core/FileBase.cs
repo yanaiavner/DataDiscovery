@@ -155,6 +155,7 @@ namespace DataDiscovery.Core
             _elmentColumnsNames.Clear();
             NotifyPropertyChanged("Header");
             NotifyPropertyChanged("ElemntNames");
+            ElmentColumnsCounter = 0;
         }
 
         protected void AddElemntColumnsName(string name, int level = 1)
